@@ -19,7 +19,7 @@ import math
 from absl import logging
 
 from datasets import imagenet
-
+import tensorflow as tf
 
 Datasets = collections.namedtuple('Datasets',
                                   ['train_dataset',
@@ -45,7 +45,7 @@ def _num_workers(distribution_strategy):
     return 1
 
 
-def _make_datasets_namedtuple(strategy,
+def _make_datasets_namedtuple(strategy:tf.distribute.experimental.TPUStrategy,
                               train_dataset_object,
                               eval_dataset_object):
   """Makes Datasets namedtuple from objects which provide input_fn.
